@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GIS-yritykset Suomessa</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
+    <style>
+      body {
+      padding: 0;
+      margin: 0;
+      }
+      html, body, #map {
+      height: 100%;
+      width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    {% if companies %}
+    <ul>
+      {% for company in companies %}
+      <li>{{company.name}}
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No companies in the database</p>
+    {% endif %}
+    <div id="map"></div>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+    <script type="text/javascript" src="{% static 'js/geocoder.js' %}">
+    <script>
+      
+      var companies = {{companies_json|safe}};
+      console.log(companies);
+      var cities = {{cities_json|safe}};
+      console.log(cities);
+
+      var map = L.map('map').setView([61.5, 23.766667], 11);
+      mapLink =
+      '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer(
+      'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; ' + mapLink + ' Contributors',
+      maxZoom: 18,
+      }).addTo(map);
+
+      /*for (var i = 0; i < places.features.length; i++)
+                          {
+                          var marker = L.marker([places.features[i].geometry.coordinates[1], places.features[i].geometry.coordinates[0]]).addTo(map);
+                          marker.bindPopup(places.features[i].properties.name_fi)
+                          }*/
+
+    </script>
+  </body>
+</html>

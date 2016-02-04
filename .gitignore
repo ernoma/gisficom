@@ -35,7 +35,15 @@ Icon
 .Spotlight-V100
 .Trashes
 
-*.pyc
+node_modules
 *~
-*travis.log
 *.zip
+#public/vendor
+public/fonts
+bin
+\#*\#
+public/vendor/threejs/physijs/bower.json
+public/vendor/threejs/physijs/examples/
+#public/vendor/q-1.4.1/
+scripts/heightmap/temp/*
+*.pyc
